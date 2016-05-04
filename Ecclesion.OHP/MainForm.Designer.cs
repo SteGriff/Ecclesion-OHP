@@ -95,12 +95,22 @@
             // planItemsLabel
             // 
             this.planItemsLabel.AutoSize = true;
-            this.planItemsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.planItemsLabel.Location = new System.Drawing.Point(12, 81);
+            this.planItemsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.planItemsLabel.Location = new System.Drawing.Point(12, 77);
             this.planItemsLabel.Name = "planItemsLabel";
-            this.planItemsLabel.Size = new System.Drawing.Size(86, 16);
+            this.planItemsLabel.Size = new System.Drawing.Size(99, 20);
             this.planItemsLabel.TabIndex = 3;
             this.planItemsLabel.Text = "Service plan:";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(227, 520);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(29, 29);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "+";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // newItemInput
             // 
@@ -112,16 +122,6 @@
             this.newItemInput.Size = new System.Drawing.Size(209, 29);
             this.newItemInput.TabIndex = 4;
             this.newItemInput.Text = "Start typing a song name...";
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(227, 520);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(29, 29);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

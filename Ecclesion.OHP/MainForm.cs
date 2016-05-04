@@ -1,5 +1,6 @@
 ﻿using Ecclesion.OHP.Core;
 using Ecclesion.OHP.Core.Models;
+using Ecclesion.OHP.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,8 +40,14 @@ namespace Ecclesion.OHP
 
         private void newItemButton_Click(object sender, EventArgs e)
         {
-            var editor = new ItemEditor();
+            var editor = new ItemEditor(ItemEditorMode.Create);
             editor.Show();
+
+            if (editor.DialogResult == DialogResult.OK)
+            {
+                _plan.Items.Add(editor.Item);
+            }
+            
         }
 
         private void newPlanButton_Click(object sender, EventArgs e)
