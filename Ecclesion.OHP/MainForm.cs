@@ -26,10 +26,16 @@ namespace Ecclesion.OHP
         public MainForm()
         {
             InitializeComponent();
+            InitializeMyComponents();
 
             FileCore.RunChecks();
 
             UpdateDisplay();
+        }
+
+        private void InitializeMyComponents()
+        {
+            newItemInput = new PlaceholderTextbox("Start typing a song name...");
         }
 
         private void UpdateDisplay()

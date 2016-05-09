@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ecclesion.OHP.Core.Models;
 
 namespace Ecclesion.OHP
 {
@@ -17,14 +18,56 @@ namespace Ecclesion.OHP
         private ItemEditorMode _mode;
         private IPlanItem _item;
 
+        private Dictionary<string, ItemEditorPage> TabsLookup;
+
+        private ItemEditorPage Page
+        {
+            get
+            {
+                return TabsLookup
+                    .Where(t => t.Key == itemEditorTabs.SelectedTab.Text)
+                    .SingleOrDefault()
+                    .Value;
+            }
+        }
+
         public ItemEditor()
         {
             InitializeComponent();
+            _mode = ItemEditorMode.Create;
+            SetupForMode();
         }
 
         public ItemEditor(ItemEditorMode mode)
         {
+            InitializeComponent();
             _mode = mode;
+            SetupForMode();
+        }
+
+        private void CommonSetup()
+        {
+            TabsLookup = new Dictionary<string, ItemEditorPage>
+            {
+                { "Song", ItemEditorPage.Song },
+                { "Notices", ItemEditorPage.Notices }
+            };
+
+            SetupForMode();
+        }
+
+        private void SetupForMode()
+        {
+            if (_mode == ItemEditorMode.Create)
+            {
+                Text = "Create item";
+                okButton.Text = "Create and add to plan";
+            }
+            else
+            {
+                Text = "Edit item";
+                okButton.Text = "Save changes";
+            }
         }
 
         public IPlanItem Item
@@ -37,7 +80,19 @@ namespace Ecclesion.OHP
 
         private void SaveItem()
         {
-            
+            if (Page == ItemEditorPage.Song)
+            {
+                var song = new Song();
+                song.Lyrics = lyricsText.Text;
+                song.Title = titleText.Text;
+
+                _item = song;
+            }
+            else
+            {
+                //TODO Create/Edit Notices
+
+            }
 
         }
 
@@ -53,6 +108,11 @@ namespace Ecclesion.OHP
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void itemEditorTabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //TODO Warn user about losing data on other tab
         }
     }
 }

@@ -37,6 +37,7 @@
             this.planItemsLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.actionMenu.SuspendLayout();
+            newItemInput = new PlaceholderTextbox();
             this.SuspendLayout();
             // 
             // actionMenu

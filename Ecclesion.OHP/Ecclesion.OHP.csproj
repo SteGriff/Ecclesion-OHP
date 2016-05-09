@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\ItemEditorMode.cs" />
+    <Compile Include="Enums\ItemEditorPage.cs" />
     <Compile Include="ItemEditor.cs">
       <SubType>Form</SubType>
     </Compile>

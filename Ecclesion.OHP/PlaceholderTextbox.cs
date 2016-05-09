@@ -14,12 +14,24 @@ namespace Ecclesion.OHP
     {
         public string Placeholder { get; set; }
 
+        public PlaceholderTextbox()
+        {
+            InitializeComponent();
+            Placeholder = "";
+            CommonSetup();
+        }
+
         public PlaceholderTextbox(string placeholder)
         {
             InitializeComponent();
-            ForeColor = SystemColors.GrayText;
             Placeholder = placeholder;
-            Text = placeholder;
+            CommonSetup();
+        }
+
+        private void CommonSetup()
+        {
+            ForeColor = SystemColors.GrayText;
+            Text = Placeholder;
             GotFocus += PlaceholderTextbox_GotFocus;
             LostFocus += PlaceholderTextbox_LostFocus;
         }
