@@ -176,6 +176,7 @@
             this.displayOffSwitch.Text = "Off";
             this.displayOffSwitch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.displayOffSwitch.UseVisualStyleBackColor = true;
+            this.displayOffSwitch.CheckedChanged += new System.EventHandler(this.displayOffSwitch_CheckedChanged);
             // 
             // label1
             // 

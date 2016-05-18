@@ -1,4 +1,5 @@
-﻿using Ecclesion.OHP.Core;
+﻿using Ecclesion.OHP.Classes;
+using Ecclesion.OHP.Core;
 using Ecclesion.OHP.Core.Models;
 using Ecclesion.OHP.Enums;
 using System;
@@ -23,12 +24,31 @@ namespace Ecclesion.OHP
             }
         }
 
+        private DisplayScreen _displayForm;
+        private DisplayScreen DisplayForm
+        {
+            get
+            {
+                if (_displayForm == null)
+                {
+                    _displayForm = new DisplayScreen();
+                    _displayForm.FormClosed += DisplayForm_FormClosed;
+                }
+                return _displayForm;
+            }
+        }
+
+        private bool DisplayIsDisplaying { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
             InitializeMyComponents();
 
             PlanFileCore.RunChecks();
+
+            ScreenManager.Initialise();
+            DisplayOff();
 
             UpdateView();
 
@@ -43,6 +63,14 @@ namespace Ecclesion.OHP
         {
             planOutline.Text = _plan.ToString();
             //planItemsList.DataSource = _plan.Items;
+
+            UpdateDisplayChecks();
+        }
+
+        private void UpdateDisplayChecks()
+        {
+            displayOnSwitch.Checked = DisplayIsDisplaying;
+            displayOffSwitch.Checked = !DisplayIsDisplaying;
         }
 
         private void RefreshPlanItems()
@@ -81,10 +109,37 @@ namespace Ecclesion.OHP
 
         private void displayOnSwitch_CheckedChanged(object sender, EventArgs e)
         {
-            var displayForm = new DisplayScreen();
-            var screens = Screen.AllScreens;
-            
-            
+            DisplayOn();
+        }
+
+        private void displayOffSwitch_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayOff();
+        }
+
+        private void DisplayOff()
+        {
+            if (DisplayIsDisplaying)
+            {
+                ScreenManager.SetFullscreen(DisplayForm, false);
+                DisplayForm.Close();
+            }            
+        }
+
+        private void DisplayOn()
+        {
+            if (!DisplayIsDisplaying)
+            {
+                DisplayForm.Show();
+                DisplayIsDisplaying = true;
+                ScreenManager.SetFullscreen(DisplayForm, true);
+            }
+        }
+
+        private void DisplayForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DisplayIsDisplaying = false;
+            UpdateDisplayChecks();
         }
     }
 }

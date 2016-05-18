@@ -28,24 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.displayLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // displayLabel
+            // 
+            this.displayLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.displayLabel.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.displayLabel.ForeColor = System.Drawing.Color.White;
+            this.displayLabel.Location = new System.Drawing.Point(12, 9);
+            this.displayLabel.Name = "displayLabel";
+            this.displayLabel.Size = new System.Drawing.Size(582, 273);
+            this.displayLabel.TabIndex = 0;
+            this.displayLabel.Text = "Hello World";
+            this.displayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DisplayScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(606, 291);
             this.ControlBox = false;
+            this.Controls.Add(this.displayLabel);
             this.Name = "DisplayScreen";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Display";
-            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.DisplayScreen_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DisplayScreen_KeyUp);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label displayLabel;
     }
 }

@@ -30,6 +30,7 @@
         {
             this.itemEditorTabs = new System.Windows.Forms.TabControl();
             this.songTab = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.titleText = new System.Windows.Forms.TextBox();
             this.titleLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,7 +38,6 @@
             this.noticesTab = new System.Windows.Forms.TabPage();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.itemEditorTabs.SuspendLayout();
             this.songTab.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +72,15 @@
             this.songTab.TabIndex = 0;
             this.songTab.Text = "Song";
             this.songTab.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(162, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(316, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "We will use the lyrics to work out the first line for you";
             // 
             // titleText
             // 
@@ -147,15 +156,6 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(165, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(313, 17);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "We will also use this to work out the first line for you";
             // 
             // ItemEditor
             // 
