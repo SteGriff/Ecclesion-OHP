@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisplayScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisplayScreen.Designer.cs">
+      <DependentUpon>DisplayScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enums\ItemEditorMode.cs" />
     <Compile Include="Enums\ItemEditorPage.cs" />
     <Compile Include="ItemEditor.cs">
@@ -72,6 +78,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DisplayScreen.resx">
+      <DependentUpon>DisplayScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ItemEditor.resx">
       <DependentUpon>ItemEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +115,9 @@
       <Project>{f7f081ea-f11d-448e-9cb9-d07167683450}</Project>
       <Name>Ecclesion.OHP.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

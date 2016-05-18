@@ -52,5 +52,10 @@ namespace Ecclesion.OHP.Core.Models
             ItemType = PlanItemType.Song;
 
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0} ({1})", FirstLine, Title);
+        }
     }
 }

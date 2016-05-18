@@ -28,9 +28,10 @@ namespace Ecclesion.OHP
             InitializeComponent();
             InitializeMyComponents();
 
-            FileCore.RunChecks();
+            PlanFileCore.RunChecks();
 
-            UpdateDisplay();
+            UpdateView();
+
         }
 
         private void InitializeMyComponents()
@@ -38,23 +39,35 @@ namespace Ecclesion.OHP
             newItemInput = new PlaceholderTextbox("Start typing a song name...");
         }
 
-        private void UpdateDisplay()
+        private void UpdateView()
         {
             planOutline.Text = _plan.ToString();
-            planItemsList.DataSource = _plan.Items;
+            //planItemsList.DataSource = _plan.Items;
         }
 
+        private void RefreshPlanItems()
+        {
+            planItemsList.Items.Clear();
+            var oc = new ListBox.ObjectCollection(planItemsList, _plan.Items.ToArray());
+            //planItemsList.Items.AddRange(oc);
+            
+        }
+        
         private void newItemButton_Click(object sender, EventArgs e)
         {
             var editor = new ItemEditor(ItemEditorMode.Create);
-            editor.Show();
+            editor.ShowDialog();
 
             if (editor.DialogResult == DialogResult.OK)
             {
                 _plan.Items.Add(editor.Item);
             }
-            
+
+            RefreshPlanItems();
+
         }
+
+
 
         private void newPlanButton_Click(object sender, EventArgs e)
         {
@@ -64,6 +77,14 @@ namespace Ecclesion.OHP
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void displayOnSwitch_CheckedChanged(object sender, EventArgs e)
+        {
+            var displayForm = new DisplayScreen();
+            var screens = Screen.AllScreens;
+            
+            
         }
     }
 }

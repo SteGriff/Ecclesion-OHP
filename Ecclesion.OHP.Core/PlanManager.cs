@@ -17,25 +17,27 @@ namespace Ecclesion.OHP.Core
                 if (_currentPlan == null)
                 {
                     //Try to load most recent plan
-                    var currentPlanCode = FileCore.CurrentPlanCode;
+                    var currentPlanCode = PlanFileCore.CurrentPlanCode;
 
-                    if (currentPlanCode == null)
+                    if (currentPlanCode != null)
                     {
-                        //No recent plan exists, create new
-                        _currentPlan = new Plan();
-                    }
-                    else
-                    {
-                        _currentPlan = FileCore.GetPlanByCode(currentPlanCode);
+                        _currentPlan = PlanFileCore.GetPlanByCode(currentPlanCode);
                     }
                     
+                }
+
+                //If still null, i.e. referenced plan did not exist
+                // return new plan
+                if (_currentPlan == null)
+                {
+                    _currentPlan = new Plan();
                 }
 
                 return _currentPlan;
             }
             set
             {
-                FileCore.SetCurrentPlan(value);
+                PlanFileCore.SetCurrentPlan(value);
                 _currentPlan = value;
             }
 
@@ -46,13 +48,12 @@ namespace Ecclesion.OHP.Core
             SaveOpenPlan();
 
             var newPlan = new Plan();
-
-            CurrentPlan = newPlan; 
+            CurrentPlan = newPlan;
         }
 
         public static void SaveOpenPlan()
         {
-            FileCore.SavePlan(CurrentPlan);
+            PlanFileCore.SavePlan(CurrentPlan);
         }
     }
 }

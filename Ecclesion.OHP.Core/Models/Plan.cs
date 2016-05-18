@@ -13,7 +13,7 @@ namespace Ecclesion.OHP.Core.Models
         {
             get
             {
-                return ToBeUsed.ToString("o") + Items.GetHashCode().ToString();
+                return ToBeUsed.ToString("yyyy-mm-dd") + Items.GetHashCode().ToString();
             }
         }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ecclesion.OHP.Core
 {
-    public static class FileCore
+    public static class PlanFileCore
     {
         private const string PLANS = "plans";
         private const string SONGS = "songs";
@@ -57,11 +57,12 @@ namespace Ecclesion.OHP.Core
         public static void SetCurrentPlan(Plan plan)
         {
             SetCurrentPlan(plan.Code);
+            SavePlan(plan);
         }
 
         public static void SetCurrentPlan(string planCode)
         {
-            var currentPlanFilePath = Path.Combine(PLANS, CURRENT_PLAN);
+            var currentPlanFilePath = GetPath(PLANS, CURRENT_PLAN);
 
             if (Directory.Exists(PLANS))
             {
@@ -71,13 +72,29 @@ namespace Ecclesion.OHP.Core
 
         public static void SavePlan(Plan plan)
         {
-            var planPath = Path.Combine(PLANS, plan.Code);
+            if (!WorthSaving(plan))
+            {
+                return;
+            }
+
+            var planPath = GetPath(PLANS, plan.Code + ".txt");
 
             if (Directory.Exists(PLANS))
             {
                 var content = JsonConvert.SerializeObject(plan, Formatting.Indented);
                 File.WriteAllText(planPath, content);
             }
+        }
+
+        private static bool WorthSaving(Plan plan)
+        {
+            return plan.Items.Count > 0 || plan.ToBeUsed.Year > 1;
+        }
+
+        private static string GetPath(string type, string file)
+        {
+            var myLocation = Environment.CurrentDirectory;
+            return Path.Combine(myLocation, type, file);
         }
 
         public static Plan GetPlanByCode(string planCode)

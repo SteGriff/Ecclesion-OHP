@@ -35,14 +35,14 @@ namespace Ecclesion.OHP
         {
             InitializeComponent();
             _mode = ItemEditorMode.Create;
-            SetupForMode();
+            CommonSetup();
         }
 
         public ItemEditor(ItemEditorMode mode)
         {
             InitializeComponent();
             _mode = mode;
-            SetupForMode();
+            CommonSetup();
         }
 
         private void CommonSetup()
