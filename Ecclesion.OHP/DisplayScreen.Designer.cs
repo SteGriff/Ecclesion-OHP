@@ -57,8 +57,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Display";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.DisplayScreen_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DisplayScreen_KeyUp);
             this.ResumeLayout(false);
 
         }

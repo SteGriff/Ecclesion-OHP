@@ -28,7 +28,13 @@ namespace Ecclesion.OHP.Core.Models
             get
             {
                 var ixFirstNewLine = Lyrics.IndexOf(Environment.NewLine);
-                return Lyrics.Substring(0, ixFirstNewLine);
+                if (ixFirstNewLine > -1)
+                {
+                    return Lyrics.Substring(0, ixFirstNewLine);
+                }
+
+                //No newline, return whole lyrics
+                return Lyrics;
             }
         }
 

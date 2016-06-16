@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ecclesion.OHP.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,24 +13,28 @@ namespace Ecclesion.OHP
 {
     public partial class DisplayScreen : Form
     {
-        private Keys[] _quitKeys = new[] { Keys.Escape, Keys.Q };
+        private DisplayController _displayController;
 
-        public DisplayScreen()
+        public DisplayScreen(DisplayController displayController)
         {
             InitializeComponent();
+            _displayController = displayController;
+
+            KeyUp += new KeyEventHandler(_displayController.KeyUp);
+
+            _displayController.CloseDisplay += DisplayController_CloseDisplay;
+            _displayController.Update += DisplayController_Update;
         }
 
-        private void DisplayScreen_Load(object sender, EventArgs e)
+        private void DisplayController_Update(object sender, EventArgs e)
         {
-
+            displayLabel.Text = _displayController.CurrentSlide.Text;
         }
 
-        private void DisplayScreen_KeyUp(object sender, KeyEventArgs e)
+        private void DisplayController_CloseDisplay(object sender, EventArgs e)
         {
-            if (_quitKeys.Contains(e.KeyCode))
-            {
-                Close();
-            }
+            Close();
         }
+        
     }
 }

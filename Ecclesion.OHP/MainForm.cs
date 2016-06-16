@@ -1,11 +1,13 @@
 ﻿using Ecclesion.OHP.Classes;
 using Ecclesion.OHP.Core;
+using Ecclesion.OHP.Core.Interfaces;
 using Ecclesion.OHP.Core.Models;
 using Ecclesion.OHP.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,6 +26,19 @@ namespace Ecclesion.OHP
             }
         }
 
+        private DisplayController _displayController;
+        private DisplayController DisplayController
+        {
+            get
+            {
+                if (_displayController == null)
+                {
+                    _displayController = new DisplayController(_plan);
+                }
+                return _displayController;
+            }
+        }
+
         private DisplayScreen _displayForm;
         private DisplayScreen DisplayForm
         {
@@ -31,14 +46,26 @@ namespace Ecclesion.OHP
             {
                 if (_displayForm == null)
                 {
-                    _displayForm = new DisplayScreen();
+                    _displayForm = new DisplayScreen(DisplayController);
                     _displayForm.FormClosed += DisplayForm_FormClosed;
                 }
                 return _displayForm;
             }
         }
 
-        private bool DisplayIsDisplaying { get; set; }
+        private bool _displayIsDisplaying;
+        private bool DisplayIsDisplaying
+        {
+            get
+            {
+                return _displayIsDisplaying;
+            }
+            set
+            {
+                _displayIsDisplaying = value;
+                UpdateDisplayChecks();
+            }
+        }
 
         public MainForm()
         {
@@ -62,7 +89,6 @@ namespace Ecclesion.OHP
         private void UpdateView()
         {
             planOutline.Text = _plan.ToString();
-            //planItemsList.DataSource = _plan.Items;
 
             UpdateDisplayChecks();
         }
@@ -76,11 +102,15 @@ namespace Ecclesion.OHP
         private void RefreshPlanItems()
         {
             planItemsList.Items.Clear();
-            var oc = new ListBox.ObjectCollection(planItemsList, _plan.Items.ToArray());
-            //planItemsList.Items.AddRange(oc);
-            
+            //var oc = new ListBox.ObjectCollection(planItemsList, _plan.Items.ToArray());
+
+            //TODO Optimize refresh of plan items
+            foreach (var item in _plan.Items)
+            {
+                planItemsList.Items.Add(item);
+            }
         }
-        
+
         private void newItemButton_Click(object sender, EventArgs e)
         {
             var editor = new ItemEditor(ItemEditorMode.Create);
@@ -109,12 +139,18 @@ namespace Ecclesion.OHP
 
         private void displayOnSwitch_CheckedChanged(object sender, EventArgs e)
         {
-            DisplayOn();
+            if (((RadioButton)sender).Checked)
+            {
+                DisplayOn();
+            }
         }
 
         private void displayOffSwitch_CheckedChanged(object sender, EventArgs e)
         {
-            DisplayOff();
+            if (((RadioButton)sender).Checked)
+            {
+                DisplayOff();
+            }
         }
 
         private void DisplayOff()
@@ -123,23 +159,36 @@ namespace Ecclesion.OHP
             {
                 ScreenManager.SetFullscreen(DisplayForm, false);
                 DisplayForm.Close();
-            }            
+                CleanUpDisplay();
+            }
         }
 
         private void DisplayOn()
         {
             if (!DisplayIsDisplaying)
             {
-                DisplayForm.Show();
                 DisplayIsDisplaying = true;
+                DisplayForm.Show();
                 ScreenManager.SetFullscreen(DisplayForm, true);
             }
         }
 
-        private void DisplayForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void CleanUpDisplay()
         {
             DisplayIsDisplaying = false;
-            UpdateDisplayChecks();
+            _displayForm = null;
+        }
+
+        private void DisplayForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CleanUpDisplay();
+        }
+
+        private void planItemsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IPlanItem item = (IPlanItem)planItemsList.SelectedItem;
+            DisplayController.DisplayingItem = item;
         }
     }
 }
+
