@@ -12,7 +12,17 @@ namespace Ecclesion.OHP.Core.Tests
     public class SlideFactoryTests
     {
         [TestMethod()]
-        public void SlideFactoryTest()
+        public void SlideFactoryCreatesSingleSlide()
+        {
+            string shortContent = "For\r\nEvery\r\nSong";
+
+            var factory = new SlideFactory(shortContent, 32, 600, 400);
+
+            Assert.IsTrue(factory.Slides.Count == 1);
+        }
+
+        [TestMethod()]
+        public void SlideFactoryCreatesMultipleSlides()
         {
             string longContent = "For\r\nEvery\r\nSong\r\nFor\r\nEvery\r\nBreath\r\nFor\r\nEvery\r\nGood\r\nAnd\r\nPerfect\r\nGift\r\nYou\r\nGive";
 

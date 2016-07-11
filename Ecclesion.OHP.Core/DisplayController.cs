@@ -38,11 +38,26 @@ namespace Ecclesion.OHP.Core
 
         public List<Slide> CurrentItemSlides { get; set; }
 
+        public static IPlanItem BlankItem
+        {
+            get
+            {
+                return new Song("Blank")
+                {
+                    Lyrics = ""
+                };
+            }
+        }
+
         private IPlanItem _displayingItem;
         public IPlanItem DisplayingItem
         {
             get
             {
+                if(_displayingItem == null)
+                {
+                    _displayingItem = BlankItem;
+                }
                 return _displayingItem;
             }
             set
@@ -97,9 +112,6 @@ namespace Ecclesion.OHP.Core
             {
                 CurrentSlide = nextSlide;
             }
-
-            CurrentSlide = nextSlide;
-
         }
 
         private void GoNext()

@@ -64,23 +64,37 @@ namespace Ecclesion.OHP.Core
                         extraText = slide.Text.Substring(vLabel.Text.Length);
                     }
 
+                    //DRY (see else block)
+                    index += 1;
                     slide.Text = vLabel.Text;
-
-                    //Make a new slide for the extra text
-                    Slide newSlide = new Slide()
-                    {
-                        Text = extraText
-                    };
-
+                    slide.Index = index;
                     finalSlides.Add(slide);
-                    finalSlides.Add(newSlide);
-                    //Slides.Insert(index + 1, newSlide);
-                    
+
+                    if (extraText != "")
+                    {
+                        index += 1;
+
+                        //Make a new slide for the extra text
+                        Slide newSlide = new Slide()
+                        {
+                            Text = extraText,
+                            Index = index
+                        };
+
+
+                        finalSlides.Add(newSlide);
+                    }
+                }
+                else
+                {
+                    //DRY
+                    index += 1;
+                    slide.Text = vLabel.Text;
+                    slide.Index = index;
+                    finalSlides.Add(slide);
                 }
             }
-
-            index++;
-
+            
             Slides = finalSlides;
         }
         
