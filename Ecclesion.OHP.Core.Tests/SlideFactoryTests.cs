@@ -16,7 +16,7 @@ namespace Ecclesion.OHP.Core.Tests
         {
             string longContent = "For\r\nEvery\r\nSong\r\nFor\r\nEvery\r\nBreath\r\nFor\r\nEvery\r\nGood\r\nAnd\r\nPerfect\r\nGift\r\nYou\r\nGive";
 
-            var factory = new SlideFactory(longContent, 48, 10,15);
+            var factory = new SlideFactory(longContent, 32, 600, 400);
 
             Assert.IsTrue(factory.Slides.Count > 1);
         }

@@ -12,6 +12,7 @@ namespace Ecclesion.OHP.Core.Interfaces
         string UID { get; }
         string Title { get; }
         PlanItemType ItemType { get; set; }
+        int Order { get; set; }
 
         string Content { get; }
     }

@@ -42,6 +42,8 @@ namespace Ecclesion.OHP.Core.Models
 
         public string Content { get { return Lyrics; } }
 
+        public int Order { get; set; }
+
         public Song()
         {
             CommonSetup();

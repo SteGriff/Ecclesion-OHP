@@ -10,8 +10,6 @@ namespace Ecclesion.OHP.Core
 {
     public class SlideFactory
     {
-        private string Content;
-
         const string fontFamily = "Arial";
 
         public List<Slide> Slides;
@@ -47,15 +45,17 @@ namespace Ecclesion.OHP.Core
             };
 
             int index = 0;
+            var finalSlides = new List<Slide>();
+
             foreach (var slide in Slides)
             {
                 vLabel.Text = slide.Text;
                 string extraText = "";
 
                 //Slide content too tall for label; split into two slides
-                if (vLabel.Size.Height > vLabel.MinimumSize.Height)
+                if (vLabel.PreferredHeight > vLabel.MinimumSize.Height)
                 {
-                    while (vLabel.Size.Height > vLabel.MinimumSize.Height)
+                    while (vLabel.PreferredHeight > vLabel.MinimumSize.Height)
                     {
                         //Reduce vLabel text by removing the last line until it fits
                         vLabel.Text = vLabel.Text.Substring(0, vLabel.Text.LastIndexOf(Environment.NewLine));
@@ -72,17 +72,18 @@ namespace Ecclesion.OHP.Core
                         Text = extraText
                     };
 
-                    Slides.Insert(index + 1, newSlide);
+                    finalSlides.Add(slide);
+                    finalSlides.Add(newSlide);
+                    //Slides.Insert(index + 1, newSlide);
                     
                 }
             }
 
             index++;
+
+            Slides = finalSlides;
         }
-
-
-
+        
 
     }
-
 }

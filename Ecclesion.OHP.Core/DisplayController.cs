@@ -20,10 +20,23 @@ namespace Ecclesion.OHP.Core
         private Plan _plan;
         private Keys[] _quitKeys = new[] { Keys.Escape, Keys.Q };
         private Keys[] _nextKeys = new[] { Keys.Right, Keys.Down, Keys.Enter, Keys.Space };
-        private Keys[] _prevKeys = new[] { Keys.Left, Keys.Up, Keys.Back};
+        private Keys[] _prevKeys = new[] { Keys.Left, Keys.Up, Keys.Back };
 
-        public Slide CurrentSlide { get; set; }
-        public List<Slide> Slides { get; set; }
+        private Slide _currentSlide;
+        public Slide CurrentSlide
+        {
+            get
+            {
+                return _currentSlide;
+            }
+            set
+            {
+                _currentSlide = value;
+                RaiseUpdate();
+            }
+        }
+
+        public List<Slide> CurrentItemSlides { get; set; }
 
         private IPlanItem _displayingItem;
         public IPlanItem DisplayingItem
@@ -35,14 +48,17 @@ namespace Ecclesion.OHP.Core
             set
             {
                 _displayingItem = value;
-                RaiseUpdate();
+                SetNewDisplayingItem();
             }
         }
 
-        public DisplayController (Plan plan)
+        public DisplayController(Plan plan)
         {
             _plan = plan;
-            DisplayingItem = plan.Items.FirstOrDefault();
+            if (plan.Items.Any())
+            {
+                DisplayingItem = plan.Items.FirstOrDefault();
+            }
         }
 
         public void KeyUp(object sender, KeyEventArgs e)
@@ -73,7 +89,7 @@ namespace Ecclesion.OHP.Core
 
         private void GetSlideByOffset(int offset)
         {
-            var nextSlide = Slides
+            var nextSlide = CurrentItemSlides
                 .Where(s => s.Index == CurrentSlide.Index + offset)
                 .FirstOrDefault();
 
@@ -96,21 +112,37 @@ namespace Ecclesion.OHP.Core
             GetSlideByOffset(-1);
         }
 
+        private void GoFirst()
+        {
+            CurrentSlide = CurrentItemSlides.FirstOrDefault();
+        }
+
         private Slide GetSlideByShortcutKey(string shortcut)
         {
-            return Slides.Where(s => s.Shortcut == shortcut).SingleOrDefault();
+            return CurrentItemSlides.Where(s => s.Shortcut == shortcut).SingleOrDefault();
         }
 
         private void RaiseCloseDisplay()
         {
-            CloseDisplay(this, new EventArgs());
+            CloseDisplay?.Invoke(this, new EventArgs());
         }
 
         private void RaiseUpdate()
         {
-            //Slides = DisplayingItem.Content
+            Update?.Invoke(this, new EventArgs());
+        }
 
-            Update(this, new EventArgs());
+        private void SetNewDisplayingItem()
+        {
+            //Generate slides for the displaying item
+            var sf = new SlideFactory(DisplayingItem.Content, 32, 600, 400);
+            CurrentItemSlides = sf.Slides;
+
+            //Go to the first slide
+            GoFirst();
+
+            //Get clients to refresh
+            RaiseUpdate();
         }
     }
 }

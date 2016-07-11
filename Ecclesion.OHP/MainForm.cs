@@ -84,6 +84,9 @@ namespace Ecclesion.OHP
         private void InitializeMyComponents()
         {
             newItemInput = new PlaceholderTextbox("Start typing a song name...");
+
+            //Get a reference to DisplayForm just to make sure it exists
+            var wakeUp = DisplayForm.Enabled;
         }
 
         private void UpdateView()
