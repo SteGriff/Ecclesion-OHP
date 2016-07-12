@@ -48,6 +48,7 @@
     <Compile Include="DisplayController.cs" />
     <Compile Include="Enums\PlanItemType.cs" />
     <Compile Include="FileCore.cs" />
+    <Compile Include="PlanFileCore.cs" />
     <Compile Include="Interfaces\IPlanItem.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\Slide.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="PlanManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlideFactory.cs" />
+    <Compile Include="SongManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\" />

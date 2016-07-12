@@ -42,7 +42,7 @@ namespace Ecclesion.OHP.Core
             }
 
         }
-
+        
         public static void NewPlan()
         {
             SaveOpenPlan();

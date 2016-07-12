@@ -72,7 +72,7 @@ namespace Ecclesion.OHP
             InitializeComponent();
             InitializeMyComponents();
 
-            PlanFileCore.RunChecks();
+            FileCore.RunChecks();
 
             ScreenManager.Initialise();
             DisplayOff();

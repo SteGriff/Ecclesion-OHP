@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ecclesion.OHP.Core.Models;
+using Ecclesion.OHP.Core;
 
 namespace Ecclesion.OHP
 {
@@ -85,6 +86,7 @@ namespace Ecclesion.OHP
                 var song = new Song();
                 song.Lyrics = lyricsText.Text;
                 song.Title = titleText.Text;
+                SongManager.SaveSong(song);
 
                 _item = song;
             }

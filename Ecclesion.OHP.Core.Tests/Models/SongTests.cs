@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Ecclesion.OHP.Core.Models.Tests
 {
@@ -33,6 +34,20 @@ namespace Ecclesion.OHP.Core.Models.Tests
             string actual = aSong.FirstLine;
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void HashTest()
+        {
+            var aSong = new Song("How great is our God");
+            aSong.Lyrics = "The splendour of the King\r\nClothed in Majesty";
+
+            string actual = aSong.Hash;
+
+            Path.Combine("C:/", actual);
+
+            //Exception not thrown
+            Assert.IsTrue(true);
         }
     }
 }

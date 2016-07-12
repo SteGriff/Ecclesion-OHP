@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ecclesion.OHP.Core.Enums;
+using System.Security.Cryptography;
 
 namespace Ecclesion.OHP.Core.Models
 {
@@ -14,8 +15,28 @@ namespace Ecclesion.OHP.Core.Models
         {
             get
             {
-                //TODO replace this with a proper DAL, Entity Framework or something
-                return string.Format("Song-{0}-{1}", FirstLine, Title);
+                return string.Format("Song-{0}-{1}", FirstLine, Hash);
+            }
+        }
+
+        public string Hash
+        {
+            get
+            {
+                var md5er = MD5.Create();
+
+                //Add the title and lyrics together (treated as UTF8)
+                
+                var byteContent = Encoding.UTF8.GetBytes(Title + Environment.NewLine + Lyrics);
+                var sb = new StringBuilder();
+                foreach(var b in byteContent)
+                {
+                    sb.Append(b.ToString("x2").ToLower());
+                }
+                return sb.ToString();
+
+                //Hash them with MD5 and return the hash as an ASCII string
+                //return Encoding.UTF8.GetString(md5er.ComputeHash(byteContent));
             }
         }
 

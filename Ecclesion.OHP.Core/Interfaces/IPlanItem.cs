@@ -10,6 +10,7 @@ namespace Ecclesion.OHP.Core.Interfaces
     public interface IPlanItem
     {
         string UID { get; }
+        string Hash { get; }
         string Title { get; }
         PlanItemType ItemType { get; set; }
         int Order { get; set; }
