@@ -20,10 +20,15 @@ namespace Ecclesion.OHP
             InitializeComponent();
             _displayController = displayController;
 
+            //Send key presses to the DisplayController
             KeyUp += new KeyEventHandler(_displayController.KeyUp);
 
+            //Handle events from the DisplayController
             _displayController.CloseDisplay += DisplayController_CloseDisplay;
             _displayController.Update += DisplayController_Update;
+
+            //Get correct first slide
+            _displayController.RaiseUpdate();
         }
 
         private void DisplayController_Update(object sender, EventArgs e)

@@ -23,20 +23,8 @@ namespace Ecclesion.OHP.Core.Models
         {
             get
             {
-                var md5er = MD5.Create();
-
-                //Add the title and lyrics together (treated as UTF8)
-                
-                var byteContent = Encoding.UTF8.GetBytes(Title + Environment.NewLine + Lyrics);
-                var sb = new StringBuilder();
-                foreach(var b in byteContent)
-                {
-                    sb.Append(b.ToString("x2").ToLower());
-                }
-                return sb.ToString();
-
-                //Hash them with MD5 and return the hash as an ASCII string
-                //return Encoding.UTF8.GetString(md5er.ComputeHash(byteContent));
+                //Hash the title and lyrics together (treated as UTF8)
+                return (Title + Environment.NewLine + Lyrics).GetMD5();
             }
         }
 

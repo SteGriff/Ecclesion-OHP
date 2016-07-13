@@ -134,12 +134,12 @@ namespace Ecclesion.OHP.Core
             return CurrentItemSlides.Where(s => s.Shortcut == shortcut).SingleOrDefault();
         }
 
-        private void RaiseCloseDisplay()
+        public void RaiseCloseDisplay()
         {
             CloseDisplay?.Invoke(this, new EventArgs());
         }
 
-        private void RaiseUpdate()
+        public void RaiseUpdate()
         {
             Update?.Invoke(this, new EventArgs());
         }

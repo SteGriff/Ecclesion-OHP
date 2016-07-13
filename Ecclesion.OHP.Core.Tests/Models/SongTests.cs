@@ -44,9 +44,13 @@ namespace Ecclesion.OHP.Core.Models.Tests
 
             string actual = aSong.Hash;
 
+            //Test that length of hashed value is correct
+            Assert.AreEqual(actual.Length, 16);
+
+            //Test that exception is not thrown on this line:
             Path.Combine("C:/", actual);
 
-            //Exception not thrown
+            //Test passed
             Assert.IsTrue(true);
         }
     }
