@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Ecclesion.OHP.Core.Models
 {
+    public delegate void PlanItemAddedHandler(object sender, EventArgs e);
+
     public class Plan
     {
+        public event PlanItemAddedHandler PlanItemAdded;
+
         public string Code
         {
             get
@@ -43,6 +47,17 @@ namespace Ecclesion.OHP.Core.Models
             return String.Format("{0} on {1}",
                 ToBeUsed.ToString("h:mm"),
                 ToBeUsed.ToString("dd MMM yyyy"));
+        }
+
+        public void RaisePlanItemAdded()
+        {
+            PlanItemAdded?.Invoke(this, new EventArgs());
+        }
+
+        public void AddItem(IPlanItem item)
+        {
+            Items.Add(item);
+            RaisePlanItemAdded();
         }
     }
 }

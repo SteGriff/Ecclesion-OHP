@@ -83,10 +83,18 @@ namespace Ecclesion.OHP
 
         private void InitializeMyComponents()
         {
+            _plan.PlanItemAdded += _plan_PlanItemAdded;
             newItemInput = new PlaceholderTextbox("Start typing a song name...");
+
+            SongManager.EagerLoad();
 
             //Get a reference to DisplayForm just to make sure it exists
             var wakeUp = DisplayForm.Enabled;
+        }
+
+        private void _plan_PlanItemAdded(object sender, EventArgs e)
+        {
+            RefreshPlanItems();
         }
 
         private void UpdateView()
@@ -121,11 +129,9 @@ namespace Ecclesion.OHP
 
             if (editor.DialogResult == DialogResult.OK)
             {
-                _plan.Items.Add(editor.Item);
+                _plan.AddItem(editor.Item);
             }
-
-            RefreshPlanItems();
-
+            
         }
 
 
@@ -158,18 +164,19 @@ namespace Ecclesion.OHP
 
         private void DisplayOff()
         {
-            if (DisplayIsDisplaying)
-            {
-                ScreenManager.SetFullscreen(DisplayForm, false);
-                DisplayForm.Close();
-                CleanUpDisplay();
-            }
+            displayOnSwitch.Checked = false;
+            projectionOnLight.Visible = false;
+            ScreenManager.SetFullscreen(DisplayForm, false);
+            DisplayForm.Close();
+            CleanUpDisplay();
         }
 
         private void DisplayOn()
         {
             if (!DisplayIsDisplaying)
             {
+                displayOffSwitch.Checked = false;
+                projectionOnLight.Visible = true;
                 DisplayIsDisplaying = true;
                 DisplayForm.Show();
                 ScreenManager.SetFullscreen(DisplayForm, true);
@@ -191,6 +198,49 @@ namespace Ecclesion.OHP
         {
             IPlanItem item = (IPlanItem)planItemsList.SelectedItem;
             DisplayController.DisplayingItem = item;
+        }
+
+        private void newItemInput_TextChanged(object sender, EventArgs e)
+        {
+            if (newItemInput.HasUserContent && newItemInput.Text.Length > 2)
+            { 
+                suggestionTimer.Stop();
+                suggestionTimer.Start();
+            }
+        }
+
+        private void PopulateSuggestions()
+        {
+            suggestionTimer.Stop();
+
+            itemSuggestions.Visible = true;
+            addItButton.Visible = true;
+
+            string input = newItemInput.Text;
+
+            if (!String.IsNullOrWhiteSpace(input))
+            {
+                //Remove all items
+                itemSuggestions.Items.Clear();
+
+                //Get matches and populate list box
+                var matches = SongManager.FindMatches(input);
+                itemSuggestions.Items.AddRange(matches.ToArray());
+            }
+        }
+
+        private void suggestionTimer_Tick(object sender, EventArgs e)
+        {
+            PopulateSuggestions();
+        }
+
+        private void itemSuggestions_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var selectedSong = SongManager.SelectedMatch(itemSuggestions.SelectedIndex);
+            _plan.AddItem(selectedSong);
+
+            itemSuggestions.Visible = false;
+            addItButton.Visible = false;
         }
     }
 }

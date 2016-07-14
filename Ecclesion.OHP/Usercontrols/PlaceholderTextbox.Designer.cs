@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // PlaceholderTextbox
+            // 
+            this.TextChanged += new System.EventHandler(this.PlaceholderTextbox_TextChanged);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

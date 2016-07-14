@@ -74,5 +74,6 @@ namespace Ecclesion.OHP.Core.Models
         {
             return string.Format("{0} ({1})", FirstLine, Title);
         }
+
     }
 }

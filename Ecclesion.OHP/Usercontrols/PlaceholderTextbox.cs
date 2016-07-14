@@ -13,6 +13,7 @@ namespace Ecclesion.OHP
     public partial class PlaceholderTextbox : TextBox
     {
         public string Placeholder { get; set; }
+        public bool HasUserContent { get; set; }
 
         public PlaceholderTextbox()
         {
@@ -30,6 +31,7 @@ namespace Ecclesion.OHP
 
         private void CommonSetup()
         {
+            HasUserContent = false;
             ForeColor = SystemColors.GrayText;
             Text = Placeholder;
             GotFocus += PlaceholderTextbox_GotFocus;
@@ -40,6 +42,7 @@ namespace Ecclesion.OHP
         {
             if (Text == string.Empty)
             {
+                HasUserContent = false;
                 Text = Placeholder;
                 ForeColor = SystemColors.GrayText;
             }
@@ -53,5 +56,18 @@ namespace Ecclesion.OHP
                 ForeColor = SystemColors.ControlText;
             }
         }
+
+        private void PlaceholderTextbox_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Text) && Text != Placeholder)
+            {
+                HasUserContent = true;
+            }
+            else
+            {
+                HasUserContent = false;
+            }
+        }
+
     }
 }

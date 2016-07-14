@@ -22,11 +22,23 @@ namespace Ecclesion.OHP.Core
         private Keys[] _nextKeys = new[] { Keys.Right, Keys.Down, Keys.Enter, Keys.Space };
         private Keys[] _prevKeys = new[] { Keys.Left, Keys.Up, Keys.Back };
 
+        private static Slide BlankSlide
+        {
+            get
+            {
+                return new Slide();
+            }
+        }
+
         private Slide _currentSlide;
         public Slide CurrentSlide
         {
             get
             {
+                if (_currentSlide == null)
+                {
+                    _currentSlide = BlankSlide;
+                }
                 return _currentSlide;
             }
             set

@@ -109,6 +109,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Usercontrols\PlaceholderTextbox.resx">
+      <DependentUpon>PlaceholderTextbox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Usercontrols\SlideSelection.resx">
       <DependentUpon>SlideSelection.cs</DependentUpon>
     </EmbeddedResource>
