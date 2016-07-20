@@ -80,7 +80,7 @@ namespace Ecclesion.OHP.Core
 
         public static bool IsMatch(string input, string songString)
         {
-            return songString.Contains(input);
+            return songString.ToLower().Contains(input.ToLower());
         }
 
         public static Song SelectedMatch(int selectedId)

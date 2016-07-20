@@ -87,7 +87,6 @@ namespace Ecclesion.OHP
         private void InitializeMyComponents()
         {
             _plan.PlanItemAdded += _plan_PlanItemAdded;
-            newItemInput = new PlaceholderTextbox("Start typing a song name...");
 
             SongManager.EagerLoad();
 
@@ -224,11 +223,24 @@ namespace Ecclesion.OHP
         private void newItemInput_TextChanged(object sender, EventArgs e)
         {
             var box = (PlaceholderTextbox)sender;
-            if (box.HasUserContent && box.Text.Length > 2)
+            if (box.HasUserContent)
             {
-                itemSuggestionsFrame.StartTimer();
-                itemSuggestionsFrame.Input = box.Text;
+                if (box.Text.Length > 2)
+                {
+                    itemSuggestionsFrame.StartTimer();
+                    itemSuggestionsFrame.Input = box.Text;
+                }
+                else
+                {
+                    itemSuggestionsFrame.GoAway();
+                }
             }
+
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            newItemInput.Clear();
         }
     }
 }

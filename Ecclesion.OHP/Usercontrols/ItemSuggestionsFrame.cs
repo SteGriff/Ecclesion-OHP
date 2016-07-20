@@ -28,8 +28,6 @@ namespace Ecclesion.OHP.Usercontrols
 
         private void PopulateSuggestions(string input)
         {
-            Visible = true;
-
             suggestionTimer.Stop();
 
             if (!string.IsNullOrWhiteSpace(input))
@@ -42,8 +40,7 @@ namespace Ecclesion.OHP.Usercontrols
                 if (matches.Any())
                 {
                     itemSuggestions.Items.AddRange(matches.ToArray());
-                    itemSuggestions.Visible = true;
-                    addItButton.Visible = true;
+                    Visible = true;
                 }
 
             }
@@ -82,6 +79,11 @@ namespace Ecclesion.OHP.Usercontrols
         private void RaiseItemSelected()
         {
             ItemSelected(this, new EventArgs());
+        }
+
+        public void GoAway()
+        {
+            Visible = false;
         }
 
     }

@@ -45,11 +45,7 @@ namespace Ecclesion.OHP
 
         private void PlaceholderTextbox_LostFocus(object sender, EventArgs e)
         {
-            if (Text == string.Empty)
-            {
-                Text = Placeholder;
-                ForeColor = SystemColors.GrayText;
-            }
+            RestorePlaceHolder();
         }
 
         private void PlaceholderTextbox_GotFocus(object sender, EventArgs e)
@@ -59,6 +55,21 @@ namespace Ecclesion.OHP
                 Text = string.Empty;
                 ForeColor = SystemColors.ControlText;
             }
+        }
+
+        private void RestorePlaceHolder()
+        {
+            if (Text == string.Empty)
+            {
+                Text = Placeholder;
+                ForeColor = SystemColors.GrayText;
+            }
+        }
+
+        public new void Clear()
+        {
+            base.Clear();
+            RestorePlaceHolder();
         }
 
     }

@@ -35,13 +35,14 @@
             this.planDisplaySplitter = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
             this.planOutline = new System.Windows.Forms.Label();
-            this.newItemInput = new Ecclesion.OHP.PlaceholderTextbox();
             this.planItemsLabel = new System.Windows.Forms.Label();
             this.planItemsList = new System.Windows.Forms.ListBox();
             this.displayOffSwitch = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.displayOnSwitch = new System.Windows.Forms.RadioButton();
             this.projectionOnLight = new System.Windows.Forms.Label();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.newItemInput = new Ecclesion.OHP.PlaceholderTextbox();
             this.actionMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.planDisplaySplitter)).BeginInit();
             this.planDisplaySplitter.Panel1.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             // planDisplaySplitter.Panel1
             // 
+            this.planDisplaySplitter.Panel1.Controls.Add(this.clearButton);
             this.planDisplaySplitter.Panel1.Controls.Add(this.label2);
             this.planDisplaySplitter.Panel1.Controls.Add(this.planOutline);
             this.planDisplaySplitter.Panel1.Controls.Add(this.newItemInput);
@@ -103,7 +105,7 @@
             this.planDisplaySplitter.Panel2.Controls.Add(this.displayOnSwitch);
             this.planDisplaySplitter.Panel2.Controls.Add(this.projectionOnLight);
             this.planDisplaySplitter.Size = new System.Drawing.Size(760, 521);
-            this.planDisplaySplitter.SplitterDistance = 280;
+            this.planDisplaySplitter.SplitterDistance = 370;
             this.planDisplaySplitter.TabIndex = 6;
             // 
             // label2
@@ -127,23 +129,9 @@
             this.planOutline.Location = new System.Drawing.Point(0, 0);
             this.planOutline.Name = "planOutline";
             this.planOutline.Padding = new System.Windows.Forms.Padding(4);
-            this.planOutline.Size = new System.Drawing.Size(277, 31);
+            this.planOutline.Size = new System.Drawing.Size(367, 31);
             this.planOutline.TabIndex = 10;
             this.planOutline.Text = "Plan Outline";
-            // 
-            // newItemInput
-            // 
-            this.newItemInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.newItemInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newItemInput.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.newItemInput.Location = new System.Drawing.Point(0, 489);
-            this.newItemInput.Name = "newItemInput";
-            this.newItemInput.Placeholder = "Start typing a song name...";
-            this.newItemInput.Size = new System.Drawing.Size(277, 29);
-            this.newItemInput.TabIndex = 8;
-            this.newItemInput.Text = "Start typing a song name...";
-            this.newItemInput.TextChanged += new System.EventHandler(this.newItemInput_TextChanged);
             // 
             // planItemsLabel
             // 
@@ -166,7 +154,7 @@
             this.planItemsList.ItemHeight = 21;
             this.planItemsList.Location = new System.Drawing.Point(0, 74);
             this.planItemsList.Name = "planItemsList";
-            this.planItemsList.Size = new System.Drawing.Size(277, 382);
+            this.planItemsList.Size = new System.Drawing.Size(367, 382);
             this.planItemsList.TabIndex = 6;
             this.planItemsList.SelectedIndexChanged += new System.EventHandler(this.planItemsList_SelectedIndexChanged);
             // 
@@ -217,6 +205,32 @@
             this.projectionOnLight.TabIndex = 13;
             this.projectionOnLight.Visible = false;
             // 
+            // clearButton
+            // 
+            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.Location = new System.Drawing.Point(313, 488);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(55, 31);
+            this.clearButton.TabIndex = 12;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
+            // newItemInput
+            // 
+            this.newItemInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.newItemInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newItemInput.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.newItemInput.Location = new System.Drawing.Point(0, 489);
+            this.newItemInput.Name = "newItemInput";
+            this.newItemInput.Placeholder = "Start typing a song name...";
+            this.newItemInput.Size = new System.Drawing.Size(312, 29);
+            this.newItemInput.TabIndex = 8;
+            this.newItemInput.Text = "Start typing a song name...";
+            this.newItemInput.TextChanged += new System.EventHandler(this.newItemInput_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -255,6 +269,7 @@
         private System.Windows.Forms.RadioButton displayOnSwitch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label projectionOnLight;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 
