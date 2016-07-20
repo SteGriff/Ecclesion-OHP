@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.actionMenu = new System.Windows.Forms.ToolStrip();
             this.newPlanButton = new System.Windows.Forms.ToolStripButton();
@@ -36,17 +35,13 @@
             this.planDisplaySplitter = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
             this.planOutline = new System.Windows.Forms.Label();
-            this.addToPlanButton = new System.Windows.Forms.Button();
+            this.newItemInput = new Ecclesion.OHP.PlaceholderTextbox();
             this.planItemsLabel = new System.Windows.Forms.Label();
             this.planItemsList = new System.Windows.Forms.ListBox();
             this.displayOffSwitch = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.displayOnSwitch = new System.Windows.Forms.RadioButton();
             this.projectionOnLight = new System.Windows.Forms.Label();
-            this.itemSuggestions = new System.Windows.Forms.ListBox();
-            this.addItButton = new System.Windows.Forms.Button();
-            this.suggestionTimer = new System.Windows.Forms.Timer(this.components);
-            this.newItemInput = new Ecclesion.OHP.PlaceholderTextbox();
             this.actionMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.planDisplaySplitter)).BeginInit();
             this.planDisplaySplitter.Panel1.SuspendLayout();
@@ -97,15 +92,12 @@
             // 
             this.planDisplaySplitter.Panel1.Controls.Add(this.label2);
             this.planDisplaySplitter.Panel1.Controls.Add(this.planOutline);
-            this.planDisplaySplitter.Panel1.Controls.Add(this.addToPlanButton);
             this.planDisplaySplitter.Panel1.Controls.Add(this.newItemInput);
             this.planDisplaySplitter.Panel1.Controls.Add(this.planItemsLabel);
             this.planDisplaySplitter.Panel1.Controls.Add(this.planItemsList);
             // 
             // planDisplaySplitter.Panel2
             // 
-            this.planDisplaySplitter.Panel2.Controls.Add(this.addItButton);
-            this.planDisplaySplitter.Panel2.Controls.Add(this.itemSuggestions);
             this.planDisplaySplitter.Panel2.Controls.Add(this.displayOffSwitch);
             this.planDisplaySplitter.Panel2.Controls.Add(this.label1);
             this.planDisplaySplitter.Panel2.Controls.Add(this.displayOnSwitch);
@@ -122,9 +114,9 @@
             this.label2.Location = new System.Drawing.Point(0, 466);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 20);
+            this.label2.Size = new System.Drawing.Size(188, 20);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Add a song:";
+            this.label2.Text = "Search for a song to add:";
             // 
             // planOutline
             // 
@@ -139,16 +131,19 @@
             this.planOutline.TabIndex = 10;
             this.planOutline.Text = "Plan Outline";
             // 
-            // addToPlanButton
+            // newItemInput
             // 
-            this.addToPlanButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addToPlanButton.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addToPlanButton.Location = new System.Drawing.Point(248, 489);
-            this.addToPlanButton.Name = "addToPlanButton";
-            this.addToPlanButton.Size = new System.Drawing.Size(29, 29);
-            this.addToPlanButton.TabIndex = 9;
-            this.addToPlanButton.Text = "+";
-            this.addToPlanButton.UseVisualStyleBackColor = true;
+            this.newItemInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.newItemInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newItemInput.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.newItemInput.Location = new System.Drawing.Point(0, 489);
+            this.newItemInput.Name = "newItemInput";
+            this.newItemInput.Placeholder = "Start typing a song name...";
+            this.newItemInput.Size = new System.Drawing.Size(277, 29);
+            this.newItemInput.TabIndex = 8;
+            this.newItemInput.Text = "Start typing a song name...";
+            this.newItemInput.TextChanged += new System.EventHandler(this.newItemInput_TextChanged);
             // 
             // planItemsLabel
             // 
@@ -222,53 +217,6 @@
             this.projectionOnLight.TabIndex = 13;
             this.projectionOnLight.Visible = false;
             // 
-            // itemSuggestions
-            // 
-            this.itemSuggestions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.itemSuggestions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemSuggestions.FormattingEnabled = true;
-            this.itemSuggestions.ItemHeight = 21;
-            this.itemSuggestions.Location = new System.Drawing.Point(7, 74);
-            this.itemSuggestions.Name = "itemSuggestions";
-            this.itemSuggestions.Size = new System.Drawing.Size(469, 340);
-            this.itemSuggestions.TabIndex = 15;
-            this.itemSuggestions.Visible = false;
-            this.itemSuggestions.SelectedValueChanged += new System.EventHandler(this.itemSuggestions_SelectedValueChanged);
-            // 
-            // addItButton
-            // 
-            this.addItButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.addItButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addItButton.Location = new System.Drawing.Point(7, 420);
-            this.addItButton.Name = "addItButton";
-            this.addItButton.Size = new System.Drawing.Size(469, 36);
-            this.addItButton.TabIndex = 16;
-            this.addItButton.Text = "Add to plan";
-            this.addItButton.UseVisualStyleBackColor = true;
-            this.addItButton.Visible = false;
-            // 
-            // suggestionTimer
-            // 
-            this.suggestionTimer.Interval = 500;
-            this.suggestionTimer.Tick += new System.EventHandler(this.suggestionTimer_Tick);
-            // 
-            // newItemInput
-            // 
-            this.newItemInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.newItemInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newItemInput.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.newItemInput.Location = new System.Drawing.Point(0, 489);
-            this.newItemInput.Name = "newItemInput";
-            this.newItemInput.Placeholder = "Start typing a song name...";
-            this.newItemInput.Size = new System.Drawing.Size(242, 29);
-            this.newItemInput.TabIndex = 8;
-            this.newItemInput.Text = "Start typing a song name...";
-            this.newItemInput.TextChanged += new System.EventHandler(this.newItemInput_TextChanged);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,7 +246,6 @@
         private System.Windows.Forms.ToolStripButton createItemButton;
         private System.Windows.Forms.ToolStripButton newPlanButton;
         private System.Windows.Forms.SplitContainer planDisplaySplitter;
-        private System.Windows.Forms.Button addToPlanButton;
         private PlaceholderTextbox newItemInput;
         private System.Windows.Forms.Label planItemsLabel;
         private System.Windows.Forms.ListBox planItemsList;
@@ -308,9 +255,6 @@
         private System.Windows.Forms.RadioButton displayOnSwitch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label projectionOnLight;
-        private System.Windows.Forms.Button addItButton;
-        private System.Windows.Forms.ListBox itemSuggestions;
-        private System.Windows.Forms.Timer suggestionTimer;
     }
 }
 

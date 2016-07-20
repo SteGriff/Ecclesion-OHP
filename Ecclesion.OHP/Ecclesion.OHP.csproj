@@ -71,6 +71,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Usercontrols\ItemSuggestionsFrame.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Usercontrols\ItemSuggestionsFrame.Designer.cs">
+      <DependentUpon>ItemSuggestionsFrame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Usercontrols\PlaceholderTextbox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -109,6 +115,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Usercontrols\ItemSuggestionsFrame.resx">
+      <DependentUpon>ItemSuggestionsFrame.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Usercontrols\PlaceholderTextbox.resx">
       <DependentUpon>PlaceholderTextbox.cs</DependentUpon>
     </EmbeddedResource>

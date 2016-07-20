@@ -3,6 +3,7 @@ using Ecclesion.OHP.Core;
 using Ecclesion.OHP.Core.Interfaces;
 using Ecclesion.OHP.Core.Models;
 using Ecclesion.OHP.Enums;
+using Ecclesion.OHP.Usercontrols;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,8 @@ namespace Ecclesion.OHP
 {
     public partial class MainForm : Form
     {
+        private ItemSuggestionsFrame itemSuggestionsFrame;
+
         private Plan _plan
         {
             get
@@ -90,6 +93,25 @@ namespace Ecclesion.OHP
 
             //Get a reference to DisplayForm just to make sure it exists
             var wakeUp = DisplayForm.Enabled;
+
+            var itemSuggestionsFrameParent = planDisplaySplitter.Panel2;
+            itemSuggestionsFrame = new ItemSuggestionsFrame()
+            {
+                Parent = itemSuggestionsFrameParent,
+                Width = itemSuggestionsFrameParent.Width,
+                Height = 400,
+                Location = new Point(0, 51),
+                Anchor = AnchorStyles.Left & AnchorStyles.Top & AnchorStyles.Right & AnchorStyles.Bottom,
+                Visible = false
+            };
+
+            itemSuggestionsFrame.ItemSelected += ItemSuggestionsFrame_ItemSelected;
+        }
+
+        private void ItemSuggestionsFrame_ItemSelected(object sender, EventArgs e)
+        {
+            var frame = (ItemSuggestionsFrame)sender;
+            _plan.AddItem(frame.SelectedItem);
         }
 
         private void _plan_PlanItemAdded(object sender, EventArgs e)
@@ -113,7 +135,6 @@ namespace Ecclesion.OHP
         private void RefreshPlanItems()
         {
             planItemsList.Items.Clear();
-            //var oc = new ListBox.ObjectCollection(planItemsList, _plan.Items.ToArray());
 
             //TODO Optimize refresh of plan items
             foreach (var item in _plan.Items)
@@ -202,45 +223,12 @@ namespace Ecclesion.OHP
 
         private void newItemInput_TextChanged(object sender, EventArgs e)
         {
-            if (newItemInput.HasUserContent && newItemInput.Text.Length > 2)
-            { 
-                suggestionTimer.Stop();
-                suggestionTimer.Start();
-            }
-        }
-
-        private void PopulateSuggestions()
-        {
-            suggestionTimer.Stop();
-
-            itemSuggestions.Visible = true;
-            addItButton.Visible = true;
-
-            string input = newItemInput.Text;
-
-            if (!String.IsNullOrWhiteSpace(input))
+            var box = (PlaceholderTextbox)sender;
+            if (box.HasUserContent && box.Text.Length > 2)
             {
-                //Remove all items
-                itemSuggestions.Items.Clear();
-
-                //Get matches and populate list box
-                var matches = SongManager.FindMatches(input);
-                itemSuggestions.Items.AddRange(matches.ToArray());
+                itemSuggestionsFrame.StartTimer();
+                itemSuggestionsFrame.Input = box.Text;
             }
-        }
-
-        private void suggestionTimer_Tick(object sender, EventArgs e)
-        {
-            PopulateSuggestions();
-        }
-
-        private void itemSuggestions_SelectedValueChanged(object sender, EventArgs e)
-        {
-            var selectedSong = SongManager.SelectedMatch(itemSuggestions.SelectedIndex);
-            _plan.AddItem(selectedSong);
-
-            itemSuggestions.Visible = false;
-            addItButton.Visible = false;
         }
     }
 }

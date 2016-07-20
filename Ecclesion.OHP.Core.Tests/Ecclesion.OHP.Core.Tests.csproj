@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -54,11 +55,16 @@
     <Compile Include="Models\SongTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlideFactoryTests.cs" />
+    <Compile Include="Usercontrols\PlaceholderTextboxTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ecclesion.OHP.Core\Ecclesion.OHP.Core.csproj">
       <Project>{F7F081EA-F11D-448E-9CB9-D07167683450}</Project>
       <Name>Ecclesion.OHP.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ecclesion.OHP\Ecclesion.OHP.csproj">
+      <Project>{72384CF6-B624-4F80-8C92-6AB6122427B4}</Project>
+      <Name>Ecclesion.OHP</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

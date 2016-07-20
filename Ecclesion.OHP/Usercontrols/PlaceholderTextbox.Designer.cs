@@ -32,7 +32,6 @@
             // 
             // PlaceholderTextbox
             // 
-            this.TextChanged += new System.EventHandler(this.PlaceholderTextbox_TextChanged);
             this.ResumeLayout(false);
 
         }
