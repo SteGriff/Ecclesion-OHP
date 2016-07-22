@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisplayController.cs" />
+    <Compile Include="Enums\ActionResult.cs" />
     <Compile Include="Enums\PlanItemType.cs" />
+    <Compile Include="Exceptions\EcclesionException.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FileCore.cs" />
     <Compile Include="PlanFileCore.cs" />

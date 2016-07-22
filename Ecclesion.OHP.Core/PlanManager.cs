@@ -23,7 +23,7 @@ namespace Ecclesion.OHP.Core
                     {
                         _currentPlan = PlanFileCore.GetPlanByCode(currentPlanCode);
                     }
-                    
+
                 }
 
                 //If still null, i.e. referenced plan did not exist
@@ -42,18 +42,42 @@ namespace Ecclesion.OHP.Core
             }
 
         }
-        
+
         public static void NewPlan()
         {
-            SaveOpenPlan();
+            //Save the current plan and then make a new one
+            // if the save fails, still create a new plan
+            // but alert the user
+            // (behaviour to be confirmed)
+
+            Exception exceptionFromSaving = null;
+
+            try
+            {
+                SaveOpenPlan();
+            }
+            catch (Exception ex)
+            {
+                exceptionFromSaving = ex;
+            }
 
             var newPlan = new Plan();
             CurrentPlan = newPlan;
+
+            if (exceptionFromSaving != null)
+            {
+                throw exceptionFromSaving;
+            }
         }
 
         public static void SaveOpenPlan()
         {
             PlanFileCore.SavePlan(CurrentPlan);
+        }
+
+        public static void LoadPlan(string filename)
+        {
+            CurrentPlan = PlanFileCore.GetPlanByFilename(filename);
         }
     }
 }

@@ -31,6 +31,12 @@ namespace Ecclesion.OHP.Core
             }
         }
 
+        public static string GetPath(string type)
+        {
+            var myLocation = Environment.CurrentDirectory;
+            return Path.Combine(myLocation, type);
+        }
+
         public static string GetPath(string type, string file)
         {
             var myLocation = Environment.CurrentDirectory;

@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,7 +100,7 @@ namespace Ecclesion.OHP
                 Parent = itemSuggestionsFrameParent,
                 Width = itemSuggestionsFrameParent.Width,
                 Height = 400,
-                Location = new Point(0, 51),
+                Location = new Point(0, planItemsLabel.Location.Y),
                 Anchor = AnchorStyles.Left & AnchorStyles.Top & AnchorStyles.Right & AnchorStyles.Bottom,
                 Visible = false
             };
@@ -241,6 +242,89 @@ namespace Ecclesion.OHP
         private void clearButton_Click(object sender, EventArgs e)
         {
             newItemInput.Clear();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewPlan();
+        }
+
+        private void newPlanButton_Click_1(object sender, EventArgs e)
+        {
+            NewPlan();
+        }
+
+        private void NewPlan()
+        {
+            try
+            {
+                PlanManager.NewPlan();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A new plan was created. However, there was a problem saving the existing plan: " + Environment.NewLine + ex.Message, "New Plan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
+        }
+
+        private void savePlanButton_Click(object sender, EventArgs e)
+        {
+            SavePlan();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SavePlan();
+        }
+
+        private void SavePlan()
+        {
+            try
+            {
+                PlanManager.SaveOpenPlan();
+                MessageBox.Show("Plan saved", "Save Plan", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was a problem saving this plan: " + Environment.NewLine + ex.Message, "Save Plan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        private void loadPlanButton_Click(object sender, EventArgs e)
+        {
+            OpenPlan();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPlan();
+        }
+
+        private void OpenPlan()
+        {
+            string filter = string.Format("Service plan files (*{0})|*{0}", PlanFileCore.FILE_EXT);
+            var loadDialog = new OpenFileDialog()
+            {
+                Filter = filter,
+                Title = "Open a service plan",
+                Multiselect  = false,
+                DefaultExt = PlanFileCore.FILE_EXT,
+                ValidateNames = true,
+                InitialDirectory = FileCore.GetPath(FileCore.PLANS)
+            };
+
+            var result = loadDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                PlanManager.LoadPlan(loadDialog.FileName);
+            }
         }
     }
 }
