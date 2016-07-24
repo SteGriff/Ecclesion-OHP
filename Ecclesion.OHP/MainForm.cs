@@ -106,6 +106,17 @@ namespace Ecclesion.OHP
             };
 
             itemSuggestionsFrame.ItemSelected += ItemSuggestionsFrame_ItemSelected;
+
+            SlideFactory.Font = LoadDefaultFont();
+            styleEditor.CurrentFont = SlideFactory.Font;
+        }
+
+        private Font LoadDefaultFont()
+        {
+            //TODO SG Get font settings from Ecclesion file system
+            //For now, return an anonymous arial instance
+            var defaultFont = new Font("Arial", 55, FontStyle.Bold);
+            return defaultFont;
         }
 
         private void ItemSuggestionsFrame_ItemSelected(object sender, EventArgs e)
@@ -326,6 +337,7 @@ namespace Ecclesion.OHP
                 PlanManager.LoadPlan(loadDialog.FileName);
             }
         }
+
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using Ecclesion.OHP.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Ecclesion.OHP.Core
 {
     public class SlideFactory
     {
-        const string fontFamily = "Arial";
+        public static Font Font { get; set; }
 
         public List<Slide> Slides;
 
@@ -39,7 +40,7 @@ namespace Ecclesion.OHP.Core
 
             var vLabel = new Label()
             {
-                Font = new System.Drawing.Font(fontFamily, emSizeInPoints),
+                Font = Font,
                 MinimumSize = new System.Drawing.Size(slideWidth, slideHeight),
                 AutoSize = true
             };
@@ -64,7 +65,7 @@ namespace Ecclesion.OHP.Core
                         extraText = slide.Text.Substring(vLabel.Text.Length);
                     }
 
-                    //DRY (see else block)
+                    //TOTO SG DRY (see else block) 1
                     index += 1;
                     slide.Text = vLabel.Text;
                     slide.Index = index;
@@ -87,7 +88,7 @@ namespace Ecclesion.OHP.Core
                 }
                 else
                 {
-                    //DRY
+                    //TODO SG DRY 2
                     index += 1;
                     slide.Text = vLabel.Text;
                     slide.Index = index;

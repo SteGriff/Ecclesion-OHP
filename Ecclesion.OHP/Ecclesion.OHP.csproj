@@ -97,6 +97,12 @@
     <Compile Include="Usercontrols\SlideSelector.Designer.cs">
       <DependentUpon>SlideSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="Usercontrols\StyleEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Usercontrols\StyleEditor.Designer.cs">
+      <DependentUpon>StyleEditor.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DisplayScreen.resx">
       <DependentUpon>DisplayScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Usercontrols\SlideSelector.resx">
       <DependentUpon>SlideSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Usercontrols\StyleEditor.resx">
+      <DependentUpon>StyleEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

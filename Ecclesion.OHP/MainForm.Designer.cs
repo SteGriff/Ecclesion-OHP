@@ -69,6 +69,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newItemInput = new Ecclesion.OHP.PlaceholderTextbox();
+            this.styleEditor = new Ecclesion.OHP.Usercontrols.StyleEditor();
             ((System.ComponentModel.ISupportInitialize)(this.planDisplaySplitter)).BeginInit();
             this.planDisplaySplitter.Panel1.SuspendLayout();
             this.planDisplaySplitter.Panel2.SuspendLayout();
@@ -98,6 +99,7 @@
             // 
             // planDisplaySplitter.Panel2
             // 
+            this.planDisplaySplitter.Panel2.Controls.Add(this.styleEditor);
             this.planDisplaySplitter.Panel2.Controls.Add(this.displayOffSwitch);
             this.planDisplaySplitter.Panel2.Controls.Add(this.label1);
             this.planDisplaySplitter.Panel2.Controls.Add(this.displayOnSwitch);
@@ -206,7 +208,7 @@
             this.displayOffSwitch.Appearance = System.Windows.Forms.Appearance.Button;
             this.displayOffSwitch.Checked = true;
             this.displayOffSwitch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayOffSwitch.Location = new System.Drawing.Point(146, 0);
+            this.displayOffSwitch.Location = new System.Drawing.Point(146, 34);
             this.displayOffSwitch.Name = "displayOffSwitch";
             this.displayOffSwitch.Size = new System.Drawing.Size(48, 31);
             this.displayOffSwitch.TabIndex = 12;
@@ -220,7 +222,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label1.Location = new System.Drawing.Point(3, 4);
+            this.label1.Location = new System.Drawing.Point(3, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 21);
             this.label1.TabIndex = 11;
@@ -230,7 +232,7 @@
             // 
             this.displayOnSwitch.Appearance = System.Windows.Forms.Appearance.Button;
             this.displayOnSwitch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayOnSwitch.Location = new System.Drawing.Point(92, 0);
+            this.displayOnSwitch.Location = new System.Drawing.Point(92, 34);
             this.displayOnSwitch.Name = "displayOnSwitch";
             this.displayOnSwitch.Size = new System.Drawing.Size(48, 31);
             this.displayOnSwitch.TabIndex = 10;
@@ -242,9 +244,9 @@
             // projectionOnLight
             // 
             this.projectionOnLight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(225)))), ((int)(((byte)(15)))));
-            this.projectionOnLight.Location = new System.Drawing.Point(89, 0);
+            this.projectionOnLight.Location = new System.Drawing.Point(89, 31);
             this.projectionOnLight.Name = "projectionOnLight";
-            this.projectionOnLight.Size = new System.Drawing.Size(55, 34);
+            this.projectionOnLight.Size = new System.Drawing.Size(55, 37);
             this.projectionOnLight.TabIndex = 13;
             this.projectionOnLight.Visible = false;
             // 
@@ -470,6 +472,14 @@
             this.newItemInput.Text = "Start typing a song name...";
             this.newItemInput.TextChanged += new System.EventHandler(this.newItemInput_TextChanged);
             // 
+            // styleEditor
+            // 
+            this.styleEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.styleEditor.Location = new System.Drawing.Point(0, 0);
+            this.styleEditor.Name = "styleEditor";
+            this.styleEditor.Size = new System.Drawing.Size(386, 31);
+            this.styleEditor.TabIndex = 14;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -535,6 +545,7 @@
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private Usercontrols.StyleEditor styleEditor;
     }
 }
 
