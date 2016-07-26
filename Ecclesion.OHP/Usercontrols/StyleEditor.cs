@@ -10,8 +10,12 @@ using System.Windows.Forms;
 
 namespace Ecclesion.OHP.Usercontrols
 {
+    public delegate void UpdateStyleHandler(object sender, EventArgs e);
+
     public partial class StyleEditor : UserControl
     {
+        public event UpdateStyleHandler UpdateStyle;
+
         private Font _currentFont;
         public Font CurrentFont
         {
@@ -23,6 +27,7 @@ namespace Ecclesion.OHP.Usercontrols
             {
                 _currentFont = value;
                 RefreshView();
+                RaiseUpdateStyle();
             }
         }
 
@@ -46,7 +51,17 @@ namespace Ecclesion.OHP.Usercontrols
                 Font = CurrentFont,
             };
 
-            fontEditor.ShowDialog();
+            var dialogResult = fontEditor.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                CurrentFont = fontEditor.Font;
+            }
+        }
+
+        private void RaiseUpdateStyle()
+        {
+            UpdateStyle?.Invoke(this, new EventArgs());
         }
     }
 }

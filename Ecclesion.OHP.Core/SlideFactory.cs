@@ -41,7 +41,7 @@ namespace Ecclesion.OHP.Core
             var vLabel = new Label()
             {
                 Font = Font,
-                MinimumSize = new System.Drawing.Size(slideWidth, slideHeight),
+                MinimumSize = new Size(slideWidth, slideHeight),
                 AutoSize = true
             };
 

@@ -107,8 +107,17 @@ namespace Ecclesion.OHP
 
             itemSuggestionsFrame.ItemSelected += ItemSuggestionsFrame_ItemSelected;
 
+            styleEditor.UpdateStyle += StyleEditor_UpdateStyle;
+
             SlideFactory.Font = LoadDefaultFont();
             styleEditor.CurrentFont = SlideFactory.Font;
+        }
+
+        private void StyleEditor_UpdateStyle(object sender, EventArgs e)
+        {
+            var font = ((StyleEditor)sender).CurrentFont;
+            SlideFactory.Font = font;
+            DisplayForm.SetStyle(font);
         }
 
         private Font LoadDefaultFont()

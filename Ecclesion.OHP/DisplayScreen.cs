@@ -31,6 +31,11 @@ namespace Ecclesion.OHP
             _displayController.RaiseUpdate();
         }
 
+        public void SetStyle(Font font)
+        {
+            displayLabel.Font = font;
+        }
+
         private void DisplayController_Update(object sender, EventArgs e)
         {
             displayLabel.Text = _displayController.CurrentSlide.Text;
