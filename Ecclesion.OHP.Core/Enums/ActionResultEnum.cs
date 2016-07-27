@@ -1,6 +1,6 @@
 ﻿namespace Ecclesion.OHP.Core.Enums
 {
-    public enum ActionResult
+    public enum ActionResultEnum
     {
         Completed,
         Unnecessary,

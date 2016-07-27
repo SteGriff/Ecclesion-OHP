@@ -21,18 +21,20 @@ namespace Ecclesion.OHP.Core
 
                     if (currentPlanCode != null)
                     {
-                        _currentPlan = PlanFileCore.GetPlanByCode(currentPlanCode);
+                        try
+                        {
+                            _currentPlan = PlanFileCore.GetPlanByCode(currentPlanCode);
+                        }
+                        catch (Exception)
+                        {
+                            //If referenced plan did not exist
+                            // return new plan
+                            _currentPlan = new Plan();
+                        }
                     }
 
                 }
-
-                //If still null, i.e. referenced plan did not exist
-                // return new plan
-                if (_currentPlan == null)
-                {
-                    _currentPlan = new Plan();
-                }
-
+                
                 return _currentPlan;
             }
             set
@@ -70,9 +72,9 @@ namespace Ecclesion.OHP.Core
             }
         }
 
-        public static void SaveOpenPlan()
+        public static ActionResult SaveOpenPlan()
         {
-            PlanFileCore.SavePlan(CurrentPlan);
+            return PlanFileCore.SavePlan(CurrentPlan);
         }
 
         public static void LoadPlan(string filename)

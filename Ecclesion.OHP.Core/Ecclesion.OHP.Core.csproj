@@ -45,8 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResult.cs" />
     <Compile Include="DisplayController.cs" />
-    <Compile Include="Enums\ActionResult.cs" />
+    <Compile Include="Enums\ActionResultEnum.cs" />
     <Compile Include="Enums\PlanItemType.cs" />
     <Compile Include="Exceptions\EcclesionException.cs" />
     <Compile Include="Extensions.cs" />

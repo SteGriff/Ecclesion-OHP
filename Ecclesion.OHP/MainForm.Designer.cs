@@ -36,8 +36,10 @@
             this.clearButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.planOutline = new System.Windows.Forms.Label();
+            this.newItemInput = new Ecclesion.OHP.PlaceholderTextbox();
             this.planItemsLabel = new System.Windows.Forms.Label();
             this.planItemsList = new System.Windows.Forms.ListBox();
+            this.styleEditor = new Ecclesion.OHP.Usercontrols.StyleEditor();
             this.displayOffSwitch = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.displayOnSwitch = new System.Windows.Forms.RadioButton();
@@ -68,8 +70,6 @@
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newItemInput = new Ecclesion.OHP.PlaceholderTextbox();
-            this.styleEditor = new Ecclesion.OHP.Usercontrols.StyleEditor();
             ((System.ComponentModel.ISupportInitialize)(this.planDisplaySplitter)).BeginInit();
             this.planDisplaySplitter.Panel1.SuspendLayout();
             this.planDisplaySplitter.Panel2.SuspendLayout();
@@ -178,6 +178,21 @@
             this.planOutline.TabIndex = 10;
             this.planOutline.Text = "Plan Outline";
             // 
+            // newItemInput
+            // 
+            this.newItemInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.newItemInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newItemInput.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.newItemInput.Location = new System.Drawing.Point(0, 489);
+            this.newItemInput.Name = "newItemInput";
+            this.newItemInput.Placeholder = "Start typing a song name...";
+            this.newItemInput.Size = new System.Drawing.Size(312, 29);
+            this.newItemInput.TabIndex = 8;
+            this.newItemInput.Text = "Start typing a song name...";
+            this.newItemInput.TextChanged += new System.EventHandler(this.newItemInput_TextChanged);
+            this.newItemInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.newItemInput_KeyDown);
+            // 
             // planItemsLabel
             // 
             this.planItemsLabel.AutoSize = true;
@@ -202,6 +217,15 @@
             this.planItemsList.Size = new System.Drawing.Size(367, 361);
             this.planItemsList.TabIndex = 6;
             this.planItemsList.SelectedIndexChanged += new System.EventHandler(this.planItemsList_SelectedIndexChanged);
+            // 
+            // styleEditor
+            // 
+            this.styleEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.styleEditor.CurrentFont = null;
+            this.styleEditor.Location = new System.Drawing.Point(0, 0);
+            this.styleEditor.Name = "styleEditor";
+            this.styleEditor.Size = new System.Drawing.Size(386, 31);
+            this.styleEditor.TabIndex = 14;
             // 
             // displayOffSwitch
             // 
@@ -457,28 +481,6 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
-            // 
-            // newItemInput
-            // 
-            this.newItemInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.newItemInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newItemInput.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.newItemInput.Location = new System.Drawing.Point(0, 489);
-            this.newItemInput.Name = "newItemInput";
-            this.newItemInput.Placeholder = "Start typing a song name...";
-            this.newItemInput.Size = new System.Drawing.Size(312, 29);
-            this.newItemInput.TabIndex = 8;
-            this.newItemInput.Text = "Start typing a song name...";
-            this.newItemInput.TextChanged += new System.EventHandler(this.newItemInput_TextChanged);
-            // 
-            // styleEditor
-            // 
-            this.styleEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.styleEditor.Location = new System.Drawing.Point(0, 0);
-            this.styleEditor.Name = "styleEditor";
-            this.styleEditor.Size = new System.Drawing.Size(386, 31);
-            this.styleEditor.TabIndex = 14;
             // 
             // MainForm
             // 

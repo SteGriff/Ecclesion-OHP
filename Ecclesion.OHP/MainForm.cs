@@ -306,8 +306,9 @@ namespace Ecclesion.OHP
         {
             try
             {
-                PlanManager.SaveOpenPlan();
-                MessageBox.Show("Plan saved", "Save Plan", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var result = PlanManager.SaveOpenPlan();
+                string filename = result.Data["file"];
+                MessageBox.Show("Plan saved as " + filename, "Save Plan", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -347,6 +348,21 @@ namespace Ecclesion.OHP
             }
         }
 
+        private void newItemInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+            {
+                itemSuggestionsFrame.ChangeSelectedIndex(-1);
+            }
+            else if(e.KeyCode == Keys.Down)
+            {
+                itemSuggestionsFrame.ChangeSelectedIndex(1);
+            }
+            else if(e.KeyCode == Keys.Enter)
+            {
+                itemSuggestionsFrame.AddCurrentSelection();
+            }
+        }
     }
 }
 

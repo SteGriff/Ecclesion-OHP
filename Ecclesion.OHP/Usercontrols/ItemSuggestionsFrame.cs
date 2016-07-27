@@ -53,23 +53,23 @@ namespace Ecclesion.OHP.Usercontrols
         
         private void addItButton_Click(object sender, EventArgs e)
         {
-            AddIt();
+            AddCurrentSelection();
         }
 
         private void itemSuggestions_DoubleClick(object sender, EventArgs e)
         {
-            AddIt();
+            AddCurrentSelection();
         }
 
         private void itemSuggestions_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Return)
             {
-                AddIt();
+                AddCurrentSelection();
             }
         }
 
-        private void AddIt()
+        public void AddCurrentSelection()
         {
             Visible = false;
             SelectedItem = SongManager.SelectedMatch(itemSuggestions.SelectedIndex);
@@ -84,6 +84,15 @@ namespace Ecclesion.OHP.Usercontrols
         public void GoAway()
         {
             Visible = false;
+        }
+
+        public void ChangeSelectedIndex(int offset)
+        {
+            if (itemSuggestions.SelectedIndex + offset < itemSuggestions.Items.Count
+                && itemSuggestions.SelectedIndex + offset >= 0)
+            { 
+                itemSuggestions.SelectedIndex += offset;
+            }
         }
 
     }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +39,8 @@ namespace Ecclesion.OHP.Core
         public static void SetCurrentPlan(Plan plan)
         {
             SetCurrentPlan(plan.Code);
-            SavePlan(plan);
+            var result = SavePlan(plan);
+
         }
 
         public static void SetCurrentPlan(string planCode)
@@ -59,14 +61,18 @@ namespace Ecclesion.OHP.Core
         {
             if (!WorthSaving(plan))
             {
-                return ActionResult.Unnecessary;
+                return new ActionResult(ActionResultEnum.Unnecessary);
             }
 
             var planPath = FileCore.GetPath(FileCore.PLANS, plan.Code + FILE_EXT);
 
             if (Directory.Exists(FileCore.PLANS))
             {
-                var content = JsonConvert.SerializeObject(plan, Formatting.Indented);
+                var content = JsonConvert.SerializeObject(plan, Formatting.Indented, new JsonSerializerSettings()
+                {
+                    TypeNameHandling = TypeNameHandling.Objects,
+                    TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple
+                });
                 File.WriteAllText(planPath, content);
             }
             else
@@ -76,7 +82,7 @@ namespace Ecclesion.OHP.Core
                 );
             }
 
-            return ActionResult.Completed;
+            return new ActionResult(ActionResultEnum.Completed, "file", planPath);
         }
 
         private static bool WorthSaving(Plan plan)
@@ -86,7 +92,7 @@ namespace Ecclesion.OHP.Core
 
         public static Plan GetPlanByCode(string planCode)
         {
-            var planFilePath = Path.Combine(FileCore.PLANS, planCode);
+            var planFilePath = Path.Combine(FileCore.PLANS, planCode, FILE_EXT);
             return GetPlanByFilename(planFilePath);
         }
 
@@ -100,13 +106,11 @@ namespace Ecclesion.OHP.Core
 
                     try
                     {
-                        Plan thePlan = JsonConvert.DeserializeObject<Plan>(planContent);
+                        Plan thePlan = JsonConvert.DeserializeObject<Plan>(planContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Objects });
                         return thePlan;
                     }
                     catch (Exception ex)
                     {
-                        //Error because
-                        //Json deserialize an interface
                         throw;
                         //Version mismatch or something?
                     }
